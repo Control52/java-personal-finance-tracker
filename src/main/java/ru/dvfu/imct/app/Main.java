@@ -1,4 +1,4 @@
-package main.java.ru.dvfu.imct.app;
+package ru.dvfu.imct.app;
 
 public class Main {
     public static void main(String[] args) {
