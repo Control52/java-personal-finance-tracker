@@ -4,45 +4,44 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Operation {
-    protected int id;
-    protected BigDecimal amount;
+    protected final long id;
     protected LocalDate date;
+    protected BigDecimal amount;
     protected String description;
-    protected String category;
-    protected Account account;
 
-
-    public Operation(int id, BigDecimal amount, LocalDate date,
-            String description, String category, Account account) {
+    public Operation (long id, LocalDate date, BigDecimal amount, String description) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Сумма операции должна быть положительной");
+        }
         this.id = id;
-        this.amount = amount;
         this.date = date;
+        this.amount = amount;
         this.description = description;
-        this.category = category;
-        this.account = account;
     }
 
-    public int getId() {
+    public abstract void execute();
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    public void  setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public long getId() {
         return id;
     }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
+ 
     public LocalDate getDate() {
         return date;
     }
-
+    public BigDecimal getAmount() {
+        return amount;
+    }
     public String getDescription() {
         return description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public Account geAccount() {
-        return account;
-    }
 }
